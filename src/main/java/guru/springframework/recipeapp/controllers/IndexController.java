@@ -1,13 +1,12 @@
 package guru.springframework.recipeapp.controllers;
 
-import guru.springframework.recipeapp.repositories.CategoryRepository;
-import guru.springframework.recipeapp.repositories.RecipeRepository;
-import guru.springframework.recipeapp.repositories.UnitOfMeasureRepository;
 import guru.springframework.recipeapp.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @Controller
 public class IndexController {
     private final RecipeService recipeService;
@@ -18,6 +17,7 @@ public class IndexController {
 
     @RequestMapping({"", "/", "index"})
     public String getIndexPage(Model model) {
+        log.info("Loading Index Page from Controller...");
 
         model.addAttribute("recipes", recipeService.getRecipes());
 
