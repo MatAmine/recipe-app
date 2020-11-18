@@ -1,37 +1,81 @@
 package guru.springframework.recipeapp.controllers;
 
+import guru.springframework.recipeapp.domain.Recipe;
 import guru.springframework.recipeapp.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
+
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@WebMvcTest(IndexController.class)
 class IndexControllerTest {
 
-    private IndexController indexController;
+//   private IndexController indexController;
 
-    @Mock
-    private RecipeService recipeService;
+   @MockBean
+   private RecipeService recipeService;
 
-    @Mock
-    private Model model;
+//   @MockBean
+//   private Model model;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-        indexController = new IndexController(recipeService);
-    }
+    @Autowired
+    private MockMvc mockMvc;
+
+//    @BeforeEach
+//    void setUp() {
+//        MockitoAnnotations.initMocks(this);
+//        indexController = new IndexController(recipeService);
+//    }
 
     @Test
-    void getIndexPage() {
-        String result = indexController.getIndexPage(model);
+    void testMockMvc() throws Exception {
 
-        verify(recipeService, times(1)).getRecipes();
-        verify(model, times(1)).addAttribute(eq("recipes"), anySet());
-        assertEquals("index", result);
+        this.mockMvc.perform(get("/")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"));
     }
+
+//    @Test
+//    void getIndexPage() {
+//
+//        Recipe recipe1 = new Recipe();
+//        recipe1.setId(1L);
+//        Recipe recipe2 = new Recipe();
+//        recipe2.setId(2L);
+//
+//        Set<Recipe> recipeSet = Set.of(recipe1, recipe2);
+//
+//        doReturn(recipeSet).when(recipeService).getRecipes();
+//
+//        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+//
+//
+//        String result = indexController.getIndexPage(model);
+//;
+//        verify(recipeService, times(1)).getRecipes();
+//        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+//        assertEquals("index", result);
+//
+//        Set<Recipe> setInController = argumentCaptor.getValue();
+//        assertEquals(recipeSet, setInController);
+//    }
 }
