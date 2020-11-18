@@ -70,6 +70,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
+					</additionalClasspathElements>
+					<parallel>none</parallel>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
