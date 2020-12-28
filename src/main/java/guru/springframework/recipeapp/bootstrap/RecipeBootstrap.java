@@ -119,6 +119,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "Read more: http://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvpiV9Sd");
 
+        guacRecipe.setUrl("http://www.random-url.net");
+
         Notes guacNotes = new Notes();
         guacNotes.setRecipeNotes("For a very quick guacamole just take a 1/4 cup of salsa and mix it in with your mashed avocados.\n" +
                 "Feel free to experiment! One classic Mexican guacamole has pomegranate seeds and chunks of peaches in it (a Diana Kennedy favorite). Try guacamole with added pineapple, mango, or strawberries.\n" +
@@ -128,6 +130,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "Read more: http://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvoun5ws");
         guacNotes.setRecipe(guacRecipe);
+        guacRecipe.setNotes(guacNotes);
 
         guacRecipe
                 .addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom))
@@ -141,6 +144,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         guacRecipe.getCategories().add(americanCategory);
         guacRecipe.getCategories().add(mexicanCategory);
+        Category cat = new Category();
+        cat.setDescription("abcdef");
+        categoryRepository.save(cat);
+        guacRecipe.getCategories().add(cat);
 
         //add to return list
         recipes.add(guacRecipe);
@@ -175,6 +182,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "\n" +
                 "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
         tacoNotes.setRecipe(tacosRecipe);
+        tacosRecipe.setNotes(tacoNotes);
+
+        tacosRecipe.setUrl("http://www.random-url.net");
 
         tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableSpoonUom))
                     .addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teapoonUom))
@@ -199,6 +209,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
+        tacosRecipe.getCategories().add(cat);
 
         recipes.add(tacosRecipe);
         return recipes;
