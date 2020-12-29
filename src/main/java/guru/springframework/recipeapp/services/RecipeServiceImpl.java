@@ -41,7 +41,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
 
-        if (!recipeOptional.isPresent()) {
+        if (recipeOptional.isEmpty()) {
             throw new RuntimeException("Recipe Not Found!");
         }
 
@@ -56,5 +56,13 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe savedRecipe = recipeRepository.save(detachedRecipe);
         log.debug("Saved RecipeId:" + savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
+    }
+
+    @Override
+    public RecipeCommand findCommandById(Long id) {
+       Optional<Recipe> foundRecipe = recipeRepository.findById(id);
+
+        log.debug("found existing Recipe :" + (foundRecipe.isPresent() ? foundRecipe.get().getId() : " none"));
+       return foundRecipe.isPresent() ? recipeToRecipeCommand.convert(foundRecipe.get()) : new RecipeCommand();
     }
 }
