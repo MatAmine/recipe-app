@@ -53,7 +53,7 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    public void getRecipesTest() throws Exception {
+    void getRecipesTest() throws Exception {
 
         Recipe recipe = new Recipe();
         HashSet receipesData = new HashSet();
@@ -68,4 +68,11 @@ class RecipeServiceImplTest {
         verify(recipeRepository, never()).findById(anyLong());
     }
 
+    @Test
+    void testDeleteById() throws Exception {
+        Long idToDelete=  2L;
+
+        recipeService.deleteById(idToDelete);
+        verify(recipeRepository, times(1)).deleteById(idToDelete);
+    }
 }

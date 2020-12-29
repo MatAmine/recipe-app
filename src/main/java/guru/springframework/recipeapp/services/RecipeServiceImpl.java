@@ -65,4 +65,9 @@ public class RecipeServiceImpl implements RecipeService {
         log.debug("found existing Recipe :" + (foundRecipe.isPresent() ? foundRecipe.get().getId() : " none"));
        return foundRecipe.isPresent() ? recipeToRecipeCommand.convert(foundRecipe.get()) : new RecipeCommand();
     }
+
+    @Override
+    public void deleteById(Long idToDelete) {
+        recipeRepository.deleteById(idToDelete);
+    }
 }
