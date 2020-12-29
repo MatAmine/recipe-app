@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * Created by jt on 6/21/17.
  */
 public class IngredientToIngredientCommandTest {
-
     public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
     public static final String DESCRIPTION = "Cheeseburger";
@@ -55,7 +54,6 @@ public class IngredientToIngredientCommandTest {
         //then
         assertNull(ingredientCommand.getUom());
         assertEquals(ID_VALUE, ingredientCommand.getId());
-       // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());
     }
@@ -79,6 +77,7 @@ public class IngredientToIngredientCommandTest {
         assertEquals(ID_VALUE, ingredientCommand.getId());
         assertNotNull(ingredientCommand.getUom());
         assertEquals(UOM_ID, ingredientCommand.getUom().getId());
+        // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());
     }
