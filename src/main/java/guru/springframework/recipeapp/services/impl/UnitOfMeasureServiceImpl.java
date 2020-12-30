@@ -1,9 +1,10 @@
-package guru.springframework.recipeapp.services;
+package guru.springframework.recipeapp.services.impl;
 
 import guru.springframework.recipeapp.commands.UnitOfMeasureCommand;
 import guru.springframework.recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.recipeapp.domain.UnitOfMeasure;
 import guru.springframework.recipeapp.repositories.UnitOfMeasureRepository;
+import guru.springframework.recipeapp.services.UnitOfMeasureService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
