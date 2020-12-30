@@ -18,7 +18,7 @@ import java.util.Set;
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-     private final RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
 
@@ -61,10 +61,10 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeCommand findCommandById(Long id) {
-       Optional<Recipe> foundRecipe = recipeRepository.findById(id);
+        Optional<Recipe> foundRecipe = recipeRepository.findById(id);
 
         log.debug("found existing Recipe :" + (foundRecipe.isPresent() ? foundRecipe.get().getId() : " none"));
-       return foundRecipe.isPresent() ? recipeToRecipeCommand.convert(foundRecipe.get()) : new RecipeCommand();
+        return foundRecipe.isPresent() ? recipeToRecipeCommand.convert(foundRecipe.get()) : new RecipeCommand();
     }
 
     @Override
