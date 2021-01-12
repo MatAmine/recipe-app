@@ -39,7 +39,7 @@ public class ImageController {
 
         imageService.saveImageFile(Long.valueOf(id), file);
 
-        return "redirect:/recipe/show/" + id;
+        return "redirect:/recipe/" + id + "/show";
     }
 
     @GetMapping("recipe/{id}/recipeimage")

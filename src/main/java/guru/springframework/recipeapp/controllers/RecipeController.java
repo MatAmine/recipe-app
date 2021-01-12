@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class RecipeController {
 
-    private RecipeService recipeService;
+    private final RecipeService recipeService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping("/recipe/show/{id}")
+    @GetMapping("/recipe/{id}/show")
     public String getRecipeById(Model model, @PathVariable Long id) {
 
         model.addAttribute("recipe", recipeService.findById(id));
@@ -33,7 +33,7 @@ public class RecipeController {
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
-        return "redirect:/recipe/show/" + savedCommand.getId();
+        return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
 
     @RequestMapping("/recipe/{id}/update")
